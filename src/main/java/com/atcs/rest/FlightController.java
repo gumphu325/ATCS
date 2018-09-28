@@ -17,12 +17,13 @@ public class FlightController {
 
 	@RequestMapping(path = "land", method = RequestMethod.POST)
 	public String enqueueFlight(Aircraft aircraft) {
-		return null;
+		return flightControlService.enqueue(aircraft) ? aircraft.getAircraftName() + " successfully enqueued"
+				: aircraft.getAircraftName() + " ATC is busy / full please try again after sometime";
 	}
 
 	@RequestMapping(path = "fly", method = RequestMethod.POST)
 	public String dequeueFlight(Aircraft aircraft) {
-		flightControlService.dequeue(aircraft);
-		return null;
+		aircraft = flightControlService.dequeue(aircraft);
+		return aircraft.getAircraftName() + " just flew !!!";
 	}
 }

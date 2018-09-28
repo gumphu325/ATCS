@@ -1,18 +1,15 @@
 package com.atcs.data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+//import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "Aircraft")
+//@Document(collection = "AIRCRAFT")
 public class Aircraft {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
+
+	private String aircraftName;
 
 	private AircraftType aircraftType;
 
@@ -24,6 +21,14 @@ public class Aircraft {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getAircraftName() {
+		return aircraftName;
+	}
+
+	public void setAircraftName(String aircraftName) {
+		this.aircraftName = aircraftName;
 	}
 
 	public AircraftType getAircraftType() {

@@ -2,7 +2,7 @@ package com.atcs.repository;
 
 import java.util.List;
 
-import org.springframework.data.mongodb.core.query.Query;
+//import org.springframework.data.mongodb.core.query.Query;
 
 public interface Repository {
 
@@ -12,7 +12,7 @@ public interface Repository {
 
 	<T> List<T> readAll(Class<T> entity);
 
-	<T> T read(Query query, Class<T> entityClass);
+	// <T> T read(Query query, Class<T> entityClass);
 
 	void delete(String key);
 
