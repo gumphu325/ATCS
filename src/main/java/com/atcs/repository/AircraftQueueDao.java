@@ -1,0 +1,54 @@
+package com.atcs.repository;
+
+import java.util.List;
+
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Query;
+
+import com.atcs.runner.MongoInitializer;
+import com.mongodb.client.MongoDatabase;
+
+@org.springframework.stereotype.Repository
+public class AircraftQueueDao implements Repository {
+
+	@Override
+	public <T> void create(T voter) {
+		MongoDatabase mongoOperations = MongoInitializer.getInstance();
+		mongoOperations.save(voter);
+	}
+
+	@Override
+	public void delete(String key) {
+	}
+
+	@Override
+	public <T> void update(T entity) {
+	}
+
+	@Override
+	public <T> List<T> readAll(Class<T> entity) {
+		MongoOperations mongoOperations = DatabaseUtils.getInstance();
+		return mongoOperations.findAll(entity);
+	}
+
+	@Override
+	public <T> void deleteAll(T entity) {
+	}
+
+	@Override
+	public <T> T read(Query query, Class<T> entityClass) {
+		MongoOperations mongoOperations = DatabaseUtils.getInstance();
+		return (T) mongoOperations.find(query, entityClass);
+	}
+
+	@Override
+	public <T> List<T> readAll(Class<T> entity) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public <T> T read(Query query, Class<T> entityClass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
