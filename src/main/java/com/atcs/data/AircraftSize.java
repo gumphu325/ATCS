@@ -2,7 +2,7 @@ package com.atcs.data;
 
 public enum AircraftSize {
 
-	SMALL(1), LARGE(2);
+	LARGE(1), SMALL(2);
 
 	private final int priority;
 

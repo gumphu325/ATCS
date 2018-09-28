@@ -1,7 +1,9 @@
 package com.atcs.service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.List;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,30 +13,33 @@ import com.atcs.data.Aircraft;
 
 @Service
 public class FlightControlService {
-	PriorityQueue<Aircraft> atsQueue = new PriorityQueue<Aircraft>(10,
+	PriorityBlockingQueue<Aircraft> atsQueue = new PriorityBlockingQueue<Aircraft>(10,
 			Comparator.comparing(Aircraft::getAircraftType).thenComparing(Aircraft::getAircraftSize));
 
 	private static final Logger logger = LogManager.getLogger(FlightControlService.class);
 
-	public Aircraft dequeue(Aircraft aircraft) {
-		Aircraft dequeuedAC = null;
+	public List<Aircraft> dequeue() {
+		Aircraft aircraft = null;
 		try {
-			dequeuedAC = atsQueue.poll();
+			aircraft = atsQueue.poll();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
-		return dequeuedAC;
+		return new ArrayList<>(atsQueue);
 
 	}
 
-	public boolean enqueue(Aircraft aircraft) {
-		boolean added = true;
+	public List<Aircraft> enqueue(Aircraft aircraft) {
 		try {
 			atsQueue.add(aircraft);
 		} catch (Exception e) {
-			added = false;
+			logger.error(e.getMessage(), e);
 		}
-		return added;
+		return new ArrayList<>(atsQueue);
+	}
+
+	public List<Aircraft> getQueue() {
+		return new ArrayList<>(atsQueue);
 	}
 
 }
