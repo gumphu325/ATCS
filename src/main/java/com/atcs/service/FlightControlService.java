@@ -19,9 +19,8 @@ public class FlightControlService {
 	private static final Logger logger = LogManager.getLogger(FlightControlService.class);
 
 	public List<Aircraft> dequeue() {
-		Aircraft aircraft = null;
 		try {
-			aircraft = atsQueue.poll();
+			atsQueue.poll();
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
@@ -29,9 +28,9 @@ public class FlightControlService {
 
 	}
 
-	public List<Aircraft> enqueue(Aircraft aircraft) {
+	public List<Aircraft> enqueue(List<Aircraft> aircrafts) {
 		try {
-			atsQueue.add(aircraft);
+			atsQueue.addAll(aircrafts);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 		}
